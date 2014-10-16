@@ -5,9 +5,10 @@ var playWithOutRecyclingState = {
 
     create: function () {
 
-        /* --- Display the labels on the screen --- */
+        /* Display the labels on the screen
+         ******************************************************/
 
-        // Display the type of test
+        // Display the type of test and some informations
         this.typeLabel = game.add.text(20, 20, 'No Recycling',
             { font: '20px Arial', fill: '#ffffff' });
         this.iterationLabel = game.add.text(20, 40, 'Iterations : 0',
@@ -20,6 +21,8 @@ var playWithOutRecyclingState = {
         this.squaresGenerator = game.time.events.loop(250, this.generateSquares, this);
         this.squaresGenerator.timer.start();
 
+        /* Counters
+         ******************************************************/
         this.iteration = 0;
         this.squaresGenerated = 0;
 
@@ -36,6 +39,7 @@ var playWithOutRecyclingState = {
             var x = i * 10;
             var velocityY = game.rnd.integerInRange(600, 800);//400/600
 
+            // Generation of a square
             var square = game.add.sprite(x, 0, 'blackSquare');
 
             // Init the square
@@ -49,6 +53,7 @@ var playWithOutRecyclingState = {
 
 
         }
+
         this.iteration++;
 
         this.iterationLabel.setText('Iterations : ' + this.iteration.toString());

@@ -5,9 +5,10 @@ var playWithRecyclingState = {
 
     create: function () {
 
-        /* --- Display the labels on the screen --- */
+        /* Display the labels on the screen
+         ******************************************************/
 
-        // Display the type of test
+        // Display the type of test and some informations
         this.typeLabel = game.add.text(20, 20, 'Recycling',
             { font: '20px Arial', fill: '#ffffff' });
         this.iterationLabel = game.add.text(20, 40, 'Iterations : 0',
@@ -16,10 +17,11 @@ var playWithRecyclingState = {
             { font: '20px Arial', fill: '#ffffff' });
 
 
-        // Create the square group
-        this.squares = game.add.group();
-        this.squares.enableBody = true;
-       //this.squares.createMultiple(20, 'blackSquare');
+        /* add a group
+         ******************************************************/
+        this.squaresGroup = game.add.group();
+        this.squaresGroup.enableBody = true;
+
 
         /* add a timer to generate black squares
          ******************************************************/
@@ -39,13 +41,15 @@ var playWithRecyclingState = {
             // Some variables
             var x = i * 10;
             var velocityY = this.game.rnd.integerInRange(600, 800);
-            // Retrieve a square from the squares group
+
+            // Generates a square or recycles one
             var square;
-            square = this.squares.getFirstExists(false);
+            square = this.squaresGroup.getFirstExists(false);
             if (!square) {
 
+                // Generate a new square
                 square = game.add.sprite(x, 0, 'blackSquare');
-                this.squares.add(square);
+                this.squaresGroup.add(square);
 
                 // Init the square
                 square.anchor.setTo(0, 0.5);
@@ -58,19 +62,16 @@ var playWithRecyclingState = {
 
             }
 
-
-
-
             // Init the square
             square.anchor.setTo(0, 0.5);
             square.reset(x, 0);
-
             square.body.velocity.y = velocityY;
-
             // Kill the square when out of the world
             square.checkWorldBounds = true;
             square.outOfBoundsKill = true;
+
         }
+
         this.iteration++;
 
         this.iterationLabel.setText('Iterations : ' + this.iteration.toString());
